@@ -1,1 +1,4 @@
-<p>home works!</p>
+<form (submit)="onSearch($event)">
+  <input type="text" [formControl]="searchTerm" placeholder="Search packages...">
+  <button type="submit">Search</button>
+</form>
