@@ -1,14 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { PackageDetails } from './types';
 @Component({
   selector: 'app-package-info',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './package-info.component.html',
   styleUrl: './package-info.component.css',
 })
 export class PackageInfoComponent {
   title = '';
-  data: any = {};
+  data: PackageDetails | undefined;
 
   constructor(@Inject(ActivatedRoute) private route: ActivatedRoute) {
     this.route.paramMap.subscribe((params) => {
@@ -25,7 +27,7 @@ export class PackageInfoComponent {
           })
           .catch((error) => console.error('Error fetching data:', error));
       } else {
-        console.warn('Package name not found in the URL.')
+        console.warn('Package name not found in the URL.');
       }
     });
   }
