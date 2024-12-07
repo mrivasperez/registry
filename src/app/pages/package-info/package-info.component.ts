@@ -1,11 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PackageDetails } from './types';
 import { MarkdownModule } from 'ngx-markdown';
 @Component({
   selector: 'app-package-info',
-  imports: [CommonModule, MarkdownModule],
+  imports: [MarkdownModule],
   templateUrl: './package-info.component.html',
   styleUrl: './package-info.component.css',
 })
