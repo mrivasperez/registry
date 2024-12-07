@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PackageDetails } from './types';
 import { MarkdownModule } from 'ngx-markdown';
@@ -8,11 +8,12 @@ import { MarkdownModule } from 'ngx-markdown';
   templateUrl: './package-info.component.html',
   styleUrl: './package-info.component.css',
 })
-export class PackageInfoComponent {
+export class PackageInfoComponent implements OnInit {
   title = '';
   data: PackageDetails | undefined;
+  constructor(private route: ActivatedRoute) {}
 
-  constructor(@Inject(ActivatedRoute) private route: ActivatedRoute) {
+  ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const packageName = params.get('packageName');
       if (packageName) {
