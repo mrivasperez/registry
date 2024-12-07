@@ -1,3 +1,11 @@
-<p>package-info works!</p>
-{{title}} <br>
-{{data.title}}
+<div *ngIf="!data || data === undefined; else content">
+  <p>Loading package details...</p>
+</div>
+
+<ng-template #content>
+  <h2>{{ title }}</h2>
+  <p>{{ data?.description }}</p>
+  <pre>{{ data?.readme }}</pre>
+
+
+</ng-template>
