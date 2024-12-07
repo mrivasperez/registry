@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PackageSummary, SearchResponse } from './types';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-search-results',
@@ -9,7 +10,7 @@ import { PackageSummary, SearchResponse } from './types';
   styleUrl: './search-results.component.css',
 })
 export class SearchResultsComponent implements OnInit {
-  results: PackageSummary[] | undefined;
+  results: PackageSummary[] | undefined = undefined;
   searchTerm = '';
   constructor(private route: ActivatedRoute) {}
 

@@ -1,1 +1,19 @@
-{{ searchTerm }} {{ results?.length }}
+@if (searchTerm) {
+<div>
+  <h2>Search Results for: {{ searchTerm }}</h2>
+  <ul>
+    @if (results?.length) { @for (result of results; track result.name) {
+    <li>
+      <a href="/packages/{{ result.name }}"
+        >{{ result.name }} (v{{ result.version }})</a
+      >
+      <p>{{ result.description }}</p>
+    </li>
+    } }
+  </ul>
+</div>
+} @else {
+<div>
+  <p>Enter a search query in the URL.</p>
+</div>
+}

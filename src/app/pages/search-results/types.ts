@@ -5,7 +5,6 @@ export interface PackageSummary {
   keywords?: string[];
 }
 
-
 export interface SearchResponse {
   objects: {
     package: {
