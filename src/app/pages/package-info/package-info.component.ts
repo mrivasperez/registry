@@ -8,11 +8,25 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PackageInfoComponent {
   title = '';
+  data: any = {};
 
   constructor(@Inject(ActivatedRoute) private route: ActivatedRoute) {
     this.route.paramMap.subscribe((params) => {
       const packageName = params.get('packageName');
-      this.title = `Package: ${packageName}`;
+      if (packageName) {
+        this.title = `${packageName}`;
+        document.title = packageName;
+        // Fetch data using vanilla JavaScript
+        fetch(`https://registry.npmjs.org/${this.title}`)
+          .then((response) => response.json())
+          .then((data) => {
+            this.data = data;
+            console.log('Data fetched:', this.data);
+          })
+          .catch((error) => console.error('Error fetching data:', error));
+      } else {
+        console.warn('Package name not found in the URL.')
+      }
     });
   }
 }
