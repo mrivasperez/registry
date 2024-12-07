@@ -6,5 +6,5 @@ import { PackageInfoComponent } from './pages/package-info/package-info.componen
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'search', component: SearchResultsComponent },
-  { path: 'package/:packageName', component: PackageInfoComponent },
+  { path: 'packages/:packageName', component: PackageInfoComponent },
 ];
