@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { PackageSummary, SearchResponse } from './types';
 
 @Component({
   selector: 'app-search-results',
@@ -8,12 +9,35 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './search-results.component.css',
 })
 export class SearchResultsComponent implements OnInit {
+  results: PackageSummary[] | undefined;
+  searchTerm = '';
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       const searchTerm = params['query'];
-      console.log(searchTerm)
+      this.searchTerm = searchTerm;
+      console.log(searchTerm);
+
+      if (searchTerm) {
+        fetch(`https://registry.npmjs.org/-/v1/search?text=${searchTerm}`)
+          .then((response) => response.json())
+          .then((data: SearchResponse) => {
+            // console.log(data.objects);
+            const results = data.objects.map(
+              ({ package: { name, description, version, keywords } }) => {
+                return {
+                  name,
+                  description,
+                  version,
+                  keywords,
+                };
+              }
+            );
+
+            this.results = results;
+          });
+      }
     });
   }
 }
