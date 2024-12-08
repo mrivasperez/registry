@@ -2,9 +2,7 @@
   @if (isLoading) {
   <app-loading />
   } @if(errorMessage) {
-    <div class="alert alert-danger" role="alert">
-      {{ errorMessage }}
-    </div>
+  <app-error [message]="errorMessage" />
   } @if (data) {
   <h2 class="mt-4">{{ title }}</h2>
   <p>{{ data.description }}</p>

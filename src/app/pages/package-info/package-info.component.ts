@@ -3,10 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { PackageDetails } from './types';
 import { MarkdownModule } from 'ngx-markdown';
 import { PackageInfoService } from './services/package-info.service';
+import { LoadingComponent } from "../../shared/loading/loading.component";
+import { ErrorComponent } from "../../shared/error/error.component";
 
 @Component({
   selector: 'app-package-info',
-  imports: [MarkdownModule],
+  imports: [MarkdownModule, LoadingComponent, ErrorComponent],
   templateUrl: './package-info.component.html',
 })
 export class PackageInfoComponent implements OnInit {
