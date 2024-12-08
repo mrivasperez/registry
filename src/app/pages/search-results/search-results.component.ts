@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PackageSummary, SearchResponse } from './types';
+import { PackageSummary, SearchResponse } from './services/types';
 
 @Component({
   selector: 'app-search-results',
