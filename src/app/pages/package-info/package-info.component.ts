@@ -4,7 +4,6 @@ import { PackageDetails } from './types';
 import { MarkdownModule } from 'ngx-markdown';
 import { PackageInfoService } from './services/package-info.service';
 
-
 @Component({
   selector: 'app-package-info',
   imports: [MarkdownModule],
@@ -14,7 +13,7 @@ import { PackageInfoService } from './services/package-info.service';
 export class PackageInfoComponent implements OnInit {
   title = '';
   data: PackageDetails | undefined;
-  isLoading = false; 
+  isLoading = false;
   errorMessage: string | null = null;
 
   constructor(
@@ -31,15 +30,16 @@ export class PackageInfoComponent implements OnInit {
 
         this.isLoading = true;
         this.packageInfoService
-          .getPackageDetails(packageName) 
+          .getPackageDetails(packageName)
           .then((data) => {
             this.data = data;
             this.isLoading = false;
             console.log('Data fetched:', this.data);
           })
           .catch((error) => {
-            this.isLoading = false; 
-            this.errorMessage = 'Error fetching package details. Please try again later.';
+            this.isLoading = false;
+            this.errorMessage =
+              'Error fetching package details. Please try again later.';
             console.error('Error fetching package details:', error);
           });
       } else {
