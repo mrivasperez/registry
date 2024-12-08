@@ -2,10 +2,12 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PackageSummary } from './services/types';
 import { SearchPackagesService } from './services/search-packages.service';
+import { LoadingComponent } from "../../shared/loading/loading.component";
+import { ErrorComponent } from "../../shared/error/error.component";
 
 @Component({
   selector: 'app-search-results',
-  imports: [],
+  imports: [LoadingComponent, ErrorComponent],
   templateUrl: './search-results.component.html',
   styleUrl: './search-results.component.css',
 })

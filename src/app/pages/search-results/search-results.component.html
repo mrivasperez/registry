@@ -1,31 +1,24 @@
 <div class="container">
   @if (isLoading) {
-  <div class="d-flex justify-content-center align-items-center">
-    <div class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
+  <app-loading />
+  } @if (errorMessage) {<app-error [message]="errorMessage" />} @if (searchTerm)
+  {
+  <div>
+    <h2>Search Results for: {{ searchTerm }}</h2>
+    <ul>
+      @if (results?.length) { @for (result of results; track result.name) {
+      <li>
+        <a href="/packages/{{ result.name }}"
+          >{{ result.name }} (v{{ result.version }})</a
+        >
+        <p>{{ result.description }}</p>
+      </li>
+      } }
+    </ul>
+  </div>
+  } @else {
+  <div>
+    <p>Enter a search query in the URL.</p>
   </div>
   }
-
-  
 </div>
-
-@if (searchTerm) {
-<div>
-  <h2>Search Results for: {{ searchTerm }}</h2>
-  <ul>
-    @if (results?.length) { @for (result of results; track result.name) {
-    <li>
-      <a href="/packages/{{ result.name }}"
-        >{{ result.name }} (v{{ result.version }})</a
-      >
-      <p>{{ result.description }}</p>
-    </li>
-    } }
-  </ul>
-</div>
-} @else {
-<div>
-  <p>Enter a search query in the URL.</p>
-</div>
-}
