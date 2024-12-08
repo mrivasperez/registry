@@ -4,21 +4,28 @@
   } @if (errorMessage) {<app-error [message]="errorMessage" />} @if (searchTerm)
   {
   <div>
-    <h2>Search Results for: {{ searchTerm }}</h2>
-    <ul>
+    <h2 class="mt-4">
+      Search Results for: <span class="font-monospace">{{ searchTerm }}</span>
+    </h2>
+    <ul class="list-group">
       @if (results?.length) { @for (result of results; track result.name) {
-      <li>
-        <a href="/packages/{{ result.name }}"
-          >{{ result.name }} (v{{ result.version }})</a
-        >
-        <p>{{ result.description }}</p>
-      </li>
+      <div class="d-flex justify-content-between align-items-center border rounded my-2 p-2">
+        <div>
+          <a href="/packages/{{ result.name }}" class="text-decoration-none">
+            {{ result.name }} (v{{ result.version }})
+          </a>
+          <p class="mb-0">{{ result.description }}</p>
+        </div>
+        <span class="badge bg-primary rounded-pill">
+          {{ result.keywords?.length }}
+        </span>
+      </div>
       } }
     </ul>
   </div>
   } @else {
   <div>
-    <p>Enter a search query in the URL.</p>
+    <p class="lead mt-3">Enter a search query in the URL.</p>
   </div>
   }
 </div>
