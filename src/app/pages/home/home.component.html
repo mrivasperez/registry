@@ -1,4 +1,20 @@
-<form (submit)="onSearch($event)">
-  <input type="text" [formControl]="searchTerm" placeholder="Search packages...">
-  <button type="submit">Search</button>
-</form>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h1 class="font-monospace">registry</h1>
+      <p>Explore the NPM registry.</p>
+
+      <form class="" (submit)="onSearch($event)">
+        <div class="input-group">
+          <input
+            type="text"
+            [formControl]="searchTerm"
+            placeholder="Search packages..."
+            class="form-control"
+          />
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
