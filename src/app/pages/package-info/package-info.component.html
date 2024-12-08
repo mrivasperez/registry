@@ -1,7 +1,13 @@
-@if (!data || data === undefined) {
-<p>loading...</p>
-} @else {
-<h2>{{ title }}</h2>
-<p>{{ data.description }}</p>
-<markdown>{{ data.readme }}</markdown>
-}
+<div class="container">
+  @if (isLoading) {
+  <app-loading />
+  } @if(errorMessage) {
+  <app-error [message]="errorMessage" />
+  } @if (data) {
+  <h2 class="mt-4">{{ title }}</h2>
+  <p>{{ data.description }}</p>
+  <div class="mt-3">
+    <markdown [data]="data.readme"></markdown>
+  </div>
+  }
+</div>

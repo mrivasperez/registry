@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   imports: [ReactiveFormsModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  templateUrl: './home.component.html'
 })
 export class HomeComponent {
   searchTerm = new FormControl('');
