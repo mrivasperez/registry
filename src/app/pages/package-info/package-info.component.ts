@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PackageDetails } from './types';
 import { MarkdownModule } from 'ngx-markdown';
+import { PackageInfoService } from './services/package-info.service';
+
+
 @Component({
   selector: 'app-package-info',
   imports: [MarkdownModule],
@@ -11,7 +14,13 @@ import { MarkdownModule } from 'ngx-markdown';
 export class PackageInfoComponent implements OnInit {
   title = '';
   data: PackageDetails | undefined;
-  constructor(private route: ActivatedRoute) {}
+  isLoading = false; 
+  errorMessage: string | null = null;
+
+  constructor(
+    private route: ActivatedRoute,
+    private packageInfoService: PackageInfoService
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -19,14 +28,20 @@ export class PackageInfoComponent implements OnInit {
       if (packageName) {
         this.title = `${packageName}`;
         document.title = packageName;
-        // Fetch data using vanilla JavaScript
-        fetch(`https://registry.npmjs.org/${this.title}`)
-          .then((response) => response.json())
+
+        this.isLoading = true;
+        this.packageInfoService
+          .getPackageDetails(packageName) 
           .then((data) => {
             this.data = data;
+            this.isLoading = false;
             console.log('Data fetched:', this.data);
           })
-          .catch((error) => console.error('Error fetching data:', error));
+          .catch((error) => {
+            this.isLoading = false; 
+            this.errorMessage = 'Error fetching package details. Please try again later.';
+            console.error('Error fetching package details:', error);
+          });
       } else {
         console.warn('Package name not found in the URL.');
       }
