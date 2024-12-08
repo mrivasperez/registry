@@ -24,7 +24,6 @@ export class SearchPackagesService {
       return results;
     } catch (error) {
       console.error('Error fetching data:', error);
-      // Handle the error (e.g., throw an error)
       throw error;
     }
   }
