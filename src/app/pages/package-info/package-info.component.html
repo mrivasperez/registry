@@ -1,14 +1,10 @@
 <div class="container">
   @if (isLoading) {
-  <div class="d-flex justify-content-center align-items-center">
-    <div class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-  </div>
+  <app-loading />
   } @if(errorMessage) {
-  <div class="alert alert-danger" role="alert">
-    {{ errorMessage }}
-  </div>
+    <div class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
   } @if (data) {
   <h2 class="mt-4">{{ title }}</h2>
   <p>{{ data.description }}</p>
