@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PackageDetails } from './types';
 import { MarkdownModule } from 'ngx-markdown';
@@ -8,7 +8,6 @@ import { PackageInfoService } from './services/package-info.service';
   selector: 'app-package-info',
   imports: [MarkdownModule],
   templateUrl: './package-info.component.html',
-  styleUrl: './package-info.component.css',
 })
 export class PackageInfoComponent implements OnInit {
   title = '';
