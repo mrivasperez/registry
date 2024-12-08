@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PackageSummary, SearchResponse } from './services/types';
+import { PackageSummary } from './services/types';
+import { SearchPackagesService } from './services/search-packages.service';
 
 @Component({
   selector: 'app-search-results',
@@ -11,31 +12,32 @@ import { PackageSummary, SearchResponse } from './services/types';
 export class SearchResultsComponent implements OnInit {
   results: PackageSummary[] | undefined = undefined;
   searchTerm = '';
-  constructor(private route: ActivatedRoute) {}
+  isLoading = false;
+  errorMessage: string | null = null;
+
+  constructor(
+    @Inject(ActivatedRoute) private route: ActivatedRoute,
+    private searchPackagesService: SearchPackagesService
+  ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      const searchTerm = params['query'];
-      this.searchTerm = searchTerm;
-      console.log(searchTerm);
+      // Use optional chaining for safety
+      this.searchTerm = params['query'] || ''; 
 
-      if (searchTerm) {
-        fetch(`https://registry.npmjs.org/-/v1/search?text=${searchTerm}`)
-          .then((response) => response.json())
-          .then((data: SearchResponse) => {
-            // console.log(data.objects);
-            const results = data.objects.map(
-              ({ package: { name, description, version, keywords } }) => {
-                return {
-                  name,
-                  description,
-                  version,
-                  keywords,
-                };
-              }
-            );
-
+      if (this.searchTerm) {
+        this.isLoading = true;
+        this.searchPackagesService
+          .searchPackages(this.searchTerm)
+          .then((results) => {
             this.results = results;
+            this.isLoading = false;
+            console.log('Data fetched:', this.results);
+          })
+          .catch((error) => {
+            this.isLoading = false;
+            this.errorMessage = 'Error fetching data. Please try again later.';
+            console.error('Error fetching data:', error);
           });
       }
     });

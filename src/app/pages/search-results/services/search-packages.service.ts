@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
 import { PackageSummary, SearchResponse } from './types';
 
 @Injectable({
