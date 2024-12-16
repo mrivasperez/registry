@@ -1,8 +1,10 @@
 <div class="navbar bg-body-tertiary sticky-top border-bottom">
-  <div class="container-fluid">
+  <div class="container">
     <ul class="navbar-nav me-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/" routerLinkActive="active"><i class="bi bi-house"></i></a>
+        <a class="nav-link" routerLink="/" routerLinkActive="active"
+          ><i class="bi bi-house"></i
+        ></a>
       </li>
     </ul>
     <form class="" (submit)="onSearch($event)">
@@ -13,7 +15,9 @@
           placeholder="Search packages..."
           class="form-control"
         />
-        <button type="submit" class="btn btn-primary">Search</button>
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-search"></i>
+        </button>
       </div>
     </form>
   </div>
