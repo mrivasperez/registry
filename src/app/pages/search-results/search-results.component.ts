@@ -19,7 +19,9 @@ export class SearchResultsComponent implements OnInit {
   constructor(
     @Inject(ActivatedRoute) private route: ActivatedRoute,
     private searchPackagesService: SearchPackagesService
-  ) {}
+  ) {
+    document.title = 'search results'
+  }
   
   getEncodedPackageName(packageName: string): string {
     return encodeURIComponent(packageName);

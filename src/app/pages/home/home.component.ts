@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
   searchTerm = new FormControl('');
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    document.title = "registry"
+  }
   onSearch(event: Event): void {
     const query = this.searchTerm.value;
     event.preventDefault(); // Prevent default form submission
