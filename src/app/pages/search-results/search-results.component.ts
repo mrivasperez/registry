@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PackageSummary } from './services/types';
 import { SearchPackagesService } from './services/search-packages.service';
 import { LoadingComponent } from '../../shared/loading/loading.component';
@@ -7,7 +7,7 @@ import { ErrorComponent } from '../../shared/error/error.component';
 
 @Component({
   selector: 'app-search-results',
-  imports: [LoadingComponent, ErrorComponent],
+  imports: [LoadingComponent, ErrorComponent, RouterModule],
   templateUrl: './search-results.component.html',
 })
 export class SearchResultsComponent implements OnInit {
@@ -20,6 +20,10 @@ export class SearchResultsComponent implements OnInit {
     @Inject(ActivatedRoute) private route: ActivatedRoute,
     private searchPackagesService: SearchPackagesService
   ) {}
+  
+  getEncodedPackageName(packageName: string): string {
+    return encodeURIComponent(packageName);
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
