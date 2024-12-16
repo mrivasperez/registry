@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { PackageDetails } from './types';
 import { MarkdownModule } from 'ngx-markdown';
 import { PackageInfoService } from './services/package-info.service';
-import { LoadingComponent } from "../../shared/loading/loading.component";
-import { ErrorComponent } from "../../shared/error/error.component";
+import { LoadingComponent } from '../../shared/loading/loading.component';
+import { ErrorComponent } from '../../shared/error/error.component';
 
 @Component({
   selector: 'app-package-info',
@@ -24,7 +24,7 @@ export class PackageInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      const packageName = params.get('packageName');
+      const packageName = decodeURIComponent(String(params.get('packageName')));
       if (packageName) {
         this.title = `${packageName}`;
         document.title = packageName;
