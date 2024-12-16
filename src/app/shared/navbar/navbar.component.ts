@@ -11,6 +11,9 @@ import { Router, RouterModule } from '@angular/router';
 export class NavbarComponent {
   searchTerm = new FormControl('');
   constructor(private router: Router) {}
+  handleHome() {
+    this.searchTerm.reset();
+  }
   onSearch(event: Event): void {
     const query = this.searchTerm.value;
     event.preventDefault(); // Prevent default form submission
